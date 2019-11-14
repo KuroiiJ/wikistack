@@ -1,13 +1,18 @@
 const express = require ('express')
 const morgan = require("morgan");
 const app = express();
-const layout = require("./views/layout.js")
-const models = require("./models/index.js")
+const layout = require("./views/layout")
+const models = require("./models/index")
 app.use(express.urlencoded({ extended: false }));
 const { db } = require("./models");
+const wikiRouter = require('./Routes/wiki')
+const userRouter = require('./Routes/user')
 
 app.use(express.static(__dirname + "./public"));
 
+app.use('/wiki', wikiRouter)
+
+app.use('/user', userRouter)
 
 //app.use('/posts', router)
 db.authenticate().
@@ -18,6 +23,9 @@ then(() => {
 app.get("/", (req, res) => {
     res.send(layout(""));
   })
+
+app.use('/wiki', wikiRouter)
+app.use('/user', userRouter)
 
 
 const PORT = 5334
