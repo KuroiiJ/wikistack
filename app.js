@@ -3,12 +3,12 @@ const morgan = require("morgan");
 const app = express();
 const layout = require("./views/layout")
 const models = require("./models/index")
-app.use(express.urlencoded({ extended: false }));
 const { db } = require("./models");
 const wikiRouter = require('./Routes/wiki')
 const userRouter = require('./Routes/user')
 
 app.use(express.static(__dirname + "./public"));
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/wiki', wikiRouter)
 
@@ -18,6 +18,10 @@ app.use('/user', userRouter)
 db.authenticate().
 then(() => {
   console.log('connected to the database');
+})
+
+app.get('/', (req, res) => {
+  res.redirect('/wiki');
 })
 
 app.get("/", (req, res) => {
