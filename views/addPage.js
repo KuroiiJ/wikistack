@@ -16,7 +16,8 @@ module.exports = () => layout(html`
           <input id="title" name="title" type="text" class="form-control"/>
         </div>
       </div>
-      <div>PLACEHOLDER FOR PAGE CONTENT TEXTAREA FIELD</div>
+        <div><label for="title" class="col-sm-2 control-label">Page Content</label>
+        <input id="content" name="content" type="text" class="form-control"/></div>
       
       <div>PLACEHOLDER FOR PAGE STATUS INPUT FIELD</div>
       <div class="col-sm-offset-2 col-sm-10">
